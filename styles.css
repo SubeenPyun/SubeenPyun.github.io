@@ -1,0 +1,48 @@
+:root {
+  color-scheme: dark;
+  --ink: #eef7ff;
+  --muted: #9db2c7;
+  --line: rgba(180, 221, 246, 0.18);
+  --deep: #07131f;
+  --panel: rgba(12, 36, 55, 0.72);
+  --cyan: #8fe6ff;
+  --blue: #8da9ff;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; min-width: 320px; color: var(--ink); background: radial-gradient(circle at 80% 0%, #123b58 0, transparent 36rem), var(--deep); line-height: 1.6; }
+a { color: inherit; }
+.site-header { align-items: center; display: flex; justify-content: space-between; max-width: 1280px; margin: auto; padding: 1.5rem 4vw; position: relative; z-index: 2; }
+.brand { font-size: .85rem; font-weight: 800; letter-spacing: .16em; text-decoration: none; }
+.brand span { color: var(--cyan); }
+.site-nav { display: flex; gap: clamp(1rem, 3vw, 2.5rem); }
+.site-nav a { color: var(--muted); font-size: .78rem; letter-spacing: .12em; text-decoration: none; text-transform: uppercase; }
+.site-nav a:hover, .site-nav a:focus-visible { color: var(--ink); }
+.language-toggle { background: transparent; border: 1px solid var(--line); border-radius: 999px; color: var(--ink); cursor: pointer; padding: .45rem .75rem; }
+.hero, .content-grid, .timeline-section, .skills-section, .games-section { max-width: 1280px; margin: auto; padding: 8rem 4vw; }
+.hero { min-height: 76vh; display: grid; align-content: center; }
+.eyebrow { color: var(--cyan); font-size: .7rem; font-weight: 700; letter-spacing: .2em; margin: 0 0 1.2rem; }
+h1, h2, h3, p { margin-top: 0; }
+h1 { font-size: clamp(3.4rem, 10vw, 8.5rem); letter-spacing: -.08em; line-height: .95; margin-bottom: 2rem; max-width: 950px; }
+h1 em { color: var(--cyan); font-style: normal; }
+h2 { font-size: clamp(2rem, 4vw, 4rem); letter-spacing: -.06em; line-height: 1.05; }
+.hero-copy { color: var(--muted); max-width: 560px; }
+.primary-link { color: var(--ink); display: inline-block; margin-top: 1.5rem; text-decoration: none; }
+.content-grid, .skills-section { border-top: 1px solid var(--line); display: grid; gap: 2rem; grid-template-columns: minmax(90px, 1fr) 3fr; }
+.content-grid p:not(.section-index) { color: var(--muted); max-width: 680px; }
+.section-index { color: var(--cyan); font-size: .75rem; }
+.section-heading { align-items: end; display: flex; justify-content: space-between; }
+.timeline { display: grid; gap: 1rem; grid-template-columns: repeat(3, 1fr); }
+.timeline-card { background: var(--panel); border: 1px solid var(--line); border-radius: 1rem; min-height: 230px; padding: 1.5rem; transition: transform .25s ease, border-color .25s ease; }
+.timeline-card:hover, .timeline-card:focus-within { border-color: var(--cyan); transform: translateY(-6px); }
+.timeline-card span, .timeline-card p, .timeline-card small { color: var(--muted); font-size: .78rem; }
+.timeline-card h3 { margin: 3.5rem 0 .5rem; }
+.skills-list { color: var(--muted); font-size: clamp(1.2rem, 3vw, 2rem); max-width: 680px; }
+.games-section { border: 1px solid var(--line); margin-bottom: 6rem; background: linear-gradient(120deg, rgba(74, 151, 195, .18), rgba(141, 169, 255, .08)); }
+.games-section p { color: var(--muted); }
+.status-pill { border: 1px solid var(--cyan); border-radius: 999px; color: var(--cyan); display: inline-block; font-size: .7rem; letter-spacing: .14em; padding: .4rem .75rem; }
+footer { border-top: 1px solid var(--line); color: var(--muted); display: flex; font-size: .75rem; justify-content: space-between; padding: 1.5rem 4vw; }
+@media (max-width: 700px) { .site-header { flex-wrap: wrap; gap: 1rem; } .site-nav { order: 3; overflow-x: auto; width: 100%; } .hero, .content-grid, .timeline-section, .skills-section, .games-section { padding: 5rem 6vw; } .content-grid, .skills-section { grid-template-columns: 1fr; } .timeline { grid-template-columns: 1fr; } .timeline-card { min-height: 180px; } .timeline-card h3 { margin-top: 2rem; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; } }
