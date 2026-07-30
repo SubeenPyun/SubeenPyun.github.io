@@ -1,16 +1,30 @@
 (() => {
   const toggle = document.querySelector('#language-toggle');
   const themeToggle = document.querySelector('#theme-toggle');
-  let language = 'ko';
+  const savedLanguage = (() => { try { return localStorage.getItem('cloudOpsLanguage') === 'en' ? 'en' : 'ko'; } catch { return 'ko'; } })();
+  let language = savedLanguage;
   function updateLanguage() {
     window.siteLanguage = language;
     document.documentElement.lang = language;
+    const globeTranslations = {
+      'Signal / 98.4%': { ko: ['Signal / 98.4%', '더미 알림 신호가 안정적인 상태로 유지되고 있습니다.'], en: ['Signal / 98.4%', 'The placeholder alert signal is holding steady.'] },
+      'Latency / 180ms': { ko: ['Latency / 180ms', '더미 서비스의 최근 응답 지연 데이터입니다.'], en: ['Latency / 180ms', 'Recent response latency for the placeholder service.'] },
+      'Region / AP-01': { ko: ['Region / AP-01', '운영 범위를 나중에 리전별 실제 데이터로 확장할 수 있습니다.'], en: ['Region / AP-01', 'The operating scope can later expand into real regional data.'] },
+      'Deploy / Stable': { ko: ['Deploy / Stable', '더미 배포 상태 카드입니다. 실제 변경 이력으로 교체할 수 있습니다.'], en: ['Deploy / Stable', 'A placeholder deployment status card, ready for real change history.'] },
+      'Queue / 42%': { ko: ['Queue / 42%', '처리 대기열의 가상 포화도 정보입니다.'], en: ['Queue / 42%', 'Placeholder saturation data for the processing queue.'] },
+      'Uptime / 99.99%': { ko: ['Uptime / 99.99%', '서비스 가용성 데이터를 넣을 수 있는 더미 카드입니다.'], en: ['Uptime / 99.99%', 'A placeholder card for service availability data.'] }
+    };
+    document.querySelectorAll('.globe-card').forEach((card) => { const copy = globeTranslations[card.dataset.card]; if (!copy) return; const [title, body] = copy[language]; const heading = card.querySelector('h3'); const paragraph = card.querySelector('p'); if (heading) heading.textContent = title; if (paragraph) paragraph.textContent = body; });
+    const openPopover = document.querySelector('.globe-popover:not([hidden])');
+    const openTitle = openPopover?.querySelector('h3')?.textContent;
+    const openCopy = Object.values(globeTranslations).find((copy) => copy.ko[0] === openTitle || copy.en[0] === openTitle);
+    if (openPopover && openCopy) { const [title, body] = openCopy[language]; openPopover.querySelector('h3').textContent = title; openPopover.querySelector('p').textContent = body; }
     document.querySelectorAll('[data-ko][data-en]').forEach((element) => { element.textContent = element.dataset[language]; });
     if (toggle) toggle.textContent = language === 'ko' ? 'EN' : 'KO';
     toggle?.setAttribute('aria-label', language === 'ko' ? '영어로 전환' : '한국어로 전환');
     window.dispatchEvent(new CustomEvent('site-language-change', { detail: { language } }));
   }
-  toggle?.addEventListener('click', () => { language = language === 'ko' ? 'en' : 'ko'; updateLanguage(); });
+  toggle?.addEventListener('click', () => { language = language === 'ko' ? 'en' : 'ko'; try { localStorage.setItem('cloudOpsLanguage', language); } catch { /* language preference is optional */ } updateLanguage(); });
   const savedTheme = (() => { try { return localStorage.getItem('cloudOpsTheme') || 'light'; } catch { return 'light'; } })();
   function updateTheme(theme) { document.body.classList.toggle('dark-mode', theme === 'dark'); if (themeToggle) { themeToggle.querySelector('span:first-child').textContent = theme === 'dark' ? '☀' : '☾'; themeToggle.querySelector('.theme-label').textContent = theme === 'dark' ? '낮' : '밤'; themeToggle.setAttribute('aria-label', theme === 'dark' ? '화이트 모드로 전환' : '다크모드로 전환'); } }
   themeToggle?.addEventListener('click', () => { const next = document.body.classList.contains('dark-mode') ? 'light' : 'dark'; try { localStorage.setItem('cloudOpsTheme', next); } catch { /* 저장소가 비활성화된 환경 */ } updateTheme(next); });
