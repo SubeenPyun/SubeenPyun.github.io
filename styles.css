@@ -46,3 +46,34 @@ h2 { font-size: clamp(2rem, 4vw, 4rem); letter-spacing: -.06em; line-height: 1.0
 footer { border-top: 1px solid var(--line); color: var(--muted); display: flex; font-size: .75rem; justify-content: space-between; padding: 1.5rem 4vw; }
 @media (max-width: 700px) { .site-header { flex-wrap: wrap; gap: 1rem; } .site-nav { order: 3; overflow-x: auto; width: 100%; } .hero, .content-grid, .timeline-section, .skills-section, .games-section { padding: 5rem 6vw; } .content-grid, .skills-section { grid-template-columns: 1fr; } .timeline { grid-template-columns: 1fr; } .timeline-card { min-height: 180px; } .timeline-card h3 { margin-top: 2rem; } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; } }
+
+.game-tabs { display: flex; flex-wrap: wrap; gap: .6rem; margin: 2rem 0 1rem; }
+.game-tab, .game-button, .direction-pad button { background: rgba(8, 23, 36, .72); border: 1px solid var(--line); border-radius: .7rem; color: var(--ink); cursor: pointer; font: inherit; padding: .65rem .9rem; }
+.game-tab:hover, .game-tab:focus-visible, .game-tab.is-active, .game-button:hover, .game-button:focus-visible, .direction-pad button:hover, .direction-pad button:focus-visible { border-color: var(--cyan); color: var(--cyan); }
+.game-panel { border-top: 1px solid var(--line); padding-top: 2rem; }
+.game-panel[hidden] { display: none; }
+.game-panel-heading { align-items: end; display: flex; gap: 2rem; justify-content: space-between; margin-bottom: 1.5rem; }
+.game-panel-heading h3 { font-size: clamp(1.4rem, 3vw, 2.4rem); margin: 1rem 0 0; }
+.game-panel-heading p { color: var(--muted); margin: 0; max-width: 18rem; text-align: right; }
+.snake-layout { align-items: start; display: grid; gap: 2rem; grid-template-columns: minmax(0, 320px) minmax(180px, 1fr); }
+#snake-board { background: #06111c; border: 1px solid var(--line); border-radius: .8rem; display: block; height: auto; max-width: 100%; width: 320px; }
+.game-side-panel { display: grid; gap: 1rem; max-width: 18rem; }
+.score-row { align-items: baseline; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; padding: .65rem 0; }
+.score-row span, .game-side-panel small, .incident-card > span { color: var(--muted); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; }
+.score-row strong { color: var(--cyan); font-size: 1.5rem; }
+.game-actions { display: flex; flex-wrap: wrap; gap: .5rem; }
+.game-button.primary { background: var(--cyan); border-color: var(--cyan); color: #062033; font-weight: 700; }
+.game-button.primary:hover, .game-button.primary:focus-visible { background: var(--ink); color: #062033; }
+.direction-pad { display: grid; gap: .35rem; justify-items: center; margin-top: .5rem; }
+.direction-pad > div { display: flex; gap: .35rem; }
+.direction-pad button { align-items: center; display: inline-flex; height: 2.6rem; justify-content: center; padding: 0; width: 2.6rem; }
+.incident-card { background: rgba(7, 19, 31, .62); border: 1px solid var(--line); border-radius: 1rem; padding: clamp(1rem, 4vw, 2rem); }
+.incident-card h3 { font-size: clamp(1.2rem, 3vw, 2rem); margin: 1rem 0 1.5rem; max-width: 42rem; }
+.incident-options { display: grid; gap: .7rem; max-width: 48rem; }
+.incident-option { background: transparent; border: 1px solid var(--line); border-radius: .7rem; color: var(--ink); cursor: pointer; padding: .8rem 1rem; text-align: left; }
+.incident-option:hover, .incident-option:focus-visible { border-color: var(--cyan); color: var(--cyan); }
+.incident-option:disabled { cursor: default; opacity: .72; }
+.incident-feedback { border-left: 2px solid var(--cyan); color: var(--muted); margin-top: 1.2rem; max-width: 48rem; padding: .7rem 1rem; }
+.incident-score { max-width: 20rem; }
+@media (max-width: 700px) { .game-panel-heading { align-items: start; flex-direction: column; } .game-panel-heading p { text-align: left; } .snake-layout { grid-template-columns: 1fr; } .game-side-panel { max-width: none; } #snake-board { margin: auto; } }
+@media (min-width: 701px) and (max-width: 900px) { .site-header { padding-left: 3vw; padding-right: 3vw; } .site-nav { gap: 1rem; } .hero, .content-grid, .timeline-section, .skills-section, .games-section { padding-left: 5vw; padding-right: 5vw; } .timeline { gap: .7rem; } .timeline-card { padding: 1rem; } .snake-layout { gap: 1.2rem; } }
